@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Books</title>
+</head>
+<body>
+<h1>Books</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Author</th>
+    <th>ISBN</th>
+    <th>Created Date</th>
+    <th>Recorded Date</th>
+    <th>Count</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.id}">1</td>
+    <td th:text="${book.name}">Book Name</td>
+    <td th:text="${book.author}">Author</td>
+    <td th:text="${book.isbn}">ISBN</td>
+    <td th:text="${#dates.format(book.createdDate, 'yyyy-MM-dd')}">Created Date</td>
+    <td th:text="${#dates.format(book.recordedDate, 'yyyy-MM-dd')}">Recorded Date</td>
+    <td th:text="${book.count}">Count</td>
+    <td>
+      <form th:action="@{/books/{id}(id=${book.id})}" method="post">
+        <input type="hidden" name="_method" value="delete" />
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
